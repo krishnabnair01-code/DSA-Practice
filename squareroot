@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+class Solution
+{
+public:
+
+int squareroot(int n)
+{
+int ans=0;
+for(int i=0;i<=n;i++)
+{
+if ((long long)i*i<=n)
+{
+ans=i;
+}
+else
+{
+break;
+}
+}
+return ans;
+}
+};
+int main()
+{
+int n=479374;
+Solution sol;
+cout<<sol.squareroot(n)<<endl;
+return 0;
+}
