@@ -1,0 +1,29 @@
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        int mapST[256];
+        int mapTS[256];
+
+        memset(mapST, -1, sizeof(mapST));
+        memset(mapTS, -1, sizeof(mapTS));
+
+        for (int i = 0; i < s.size(); i++) {
+            char c1 = s[i];
+            char c2 = t[i];
+
+            // Check s -> t mapping
+            if (mapST[c1] == -1)
+                mapST[c1] = c2;
+            else if (mapST[c1] != c2)
+                return false;
+
+            // Check t -> s mapping
+            if (mapTS[c2] == -1)
+                mapTS[c2] = c1;
+            else if (mapTS[c2] != c1)
+                return false;
+        }
+
+        return true;
+    }
+};
