@@ -1,0 +1,40 @@
+class Solution {
+public:
+    int snakesAndLadders(vector<vector<int>>& board) {
+        int n = board.size();
+        vector<int> visited(n*n + 1, 0);
+        queue<pair<int,int>> q;  // {square, moves}
+        
+        q.push({1, 0});
+        visited[1] = 1;
+
+        while (!q.empty()) {
+            auto [curr, moves] = q.front();
+            q.pop();
+
+            if (curr == n*n)
+                return moves;
+
+            for (int dice = 1; dice <= 6; dice++) {
+                int next = curr + dice;
+                if (next > n*n) continue;
+
+                int idx = next - 1;
+                int r = n - 1 - idx / n;
+                int c = idx % n;
+
+                if ((n - 1 - r) % 2 == 1)
+                    c = n - 1 - c;
+
+                if (board[r][c] != -1)
+                    next = board[r][c];
+
+                if (!visited[next]) {
+                    visited[next] = 1;
+                    q.push({next, moves + 1});
+                }
+            }
+        }
+        return -1;
+    }
+};
